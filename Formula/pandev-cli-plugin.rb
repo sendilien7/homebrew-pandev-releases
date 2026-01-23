@@ -1,15 +1,14 @@
-# Formula/pandev-cli-plugin.rb
 class PandevCliPlugin < Formula
-  desc "Your CLI Plugin Description"
+  desc "Pandev CLI Plugin"
   homepage "https://github.com/sendilien7/homebrew-pandev-releases"
-  version "1.0.0" # This must match the version in your build workflow
+  version "1.0.0"
 
   if Hardware::CPU.intel?
     url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.0/pandev-cli-plugin_1.0.0_macOS_amd64.tar.gz"
-    sha256 "your_amd64_hash"
+    sha256 "REPLACE_WITH_AMD64_HASH"
   else
     url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.0/pandev-cli-plugin_1.0.0_macOS_arm64.tar.gz"
-    sha256 "your_arm64_hash"
+    sha256 "REPLACE_WITH_ARM64_HASH"
   end
 
   def install

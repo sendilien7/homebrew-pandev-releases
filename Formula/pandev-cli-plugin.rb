@@ -1,8 +1,8 @@
 =begin
 
 after release just update the versions with the new hashes. To get the new hashes you need to run (don't forget to change the version):
-curl -sL https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download/v1.0.8/pandev-cli-plugin_1.0.8_macOS_amd64.tar.gz | shasum -a 256
-curl -sL https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download/v1.0.8/pandev-cli-plugin_1.0.8_macOS_arm64.tar.gz | shasum -a 256
+curl -sL https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download/v1.0.9/pandev-cli-plugin_1.0.9_macOS_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download/v1.0.9/pandev-cli-plugin_1.0.9_macOS_arm64.tar.gz | shasum -a 256
 
 !!! YOU HAVE TO CHANGE THE VERSIONS IN 3 LINES !!!
 =end
@@ -10,14 +10,14 @@ curl -sL https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download
 class PandevCliPlugin < Formula
   desc "Pandev CLI Plugin"
   homepage "https://github.com/pandev-metriks/homebrew-pandev-cli"
-  version "1.0.8"
+  version "1.0.9"
 
   if Hardware::CPU.intel?
-    url "https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download/v1.0.8/pandev-cli-plugin_1.0.8_macOS_amd64.tar.gz"
-    sha256 "6e602962a4656c593110880c91c4ddf02c69c942b96b3e3b17361c5207264b44"
+    url "https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download/v1.0.9/pandev-cli-plugin_1.0.9_macOS_amd64.tar.gz"
+    sha256 "6f2fd93fc36ac11facd398658622927d2f3bbf58ff2be7563d4c8469fac2d59e"
   else
-    url "https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download/v1.0.8/pandev-cli-plugin_1.0.8_macOS_arm64.tar.gz"
-    sha256 "d3179858e4989a059ad462f20e5ef45148705a42bc9f96fd8ff50b5214bcf3b5"
+    url "https://github.com/pandev-metriks/homebrew-pandev-cli/releases/download/v1.0.9/pandev-cli-plugin_1.0.9_macOS_arm64.tar.gz"
+    sha256 "37ca4b73c8c03858be768a096411a0dbc33094f37ee2531ef86ff44bfc8f7825"
   end
 
   def install

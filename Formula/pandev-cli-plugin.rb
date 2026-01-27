@@ -30,13 +30,12 @@ class PandevCliPlugin < Formula
     bin.install_symlink libexec/"bin/pandev-cli-plugin"
   end
 
-  def post_install
-    system "sudo", bin/"pandev-cli-plugin", "--install"
-  end
-
   def caveats
     <<~EOS
-      To complete uninstallation, run before `brew uninstall`:
+      To complete installation, run:
+        sudo pandev-cli-plugin --install
+
+      To uninstall, run before `brew uninstall`:
         sudo pandev-cli-plugin --uninstall
     EOS
   end

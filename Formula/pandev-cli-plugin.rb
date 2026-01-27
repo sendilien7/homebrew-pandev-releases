@@ -2,9 +2,9 @@
 
 after release just update the versions with the new hashes. To get the new hashes you need to run (don't forget to change
 the version):
-curl -sL https://github.com/sendilien7/homebrew-pandev-releasesreleases/download/v1.1.7/pandev-cli-plugin_1.1.7_macOS_amd64.tar.gz | shasum -a 256
-curl -sL https://github.com/sendilien7/homebrew-pandev-releasesreleases/download/v1.1.7/pandev-cli-plugin_1.1.7_macOS_arm64.tar.gz | shasum -a 256
-curl -sL https://github.com/sendilien7/homebrew-pandev-releasesreleases/download/v1.1.7/pandev-cli-plugin_1.1.7_Linux_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.3/pandev-cli-plugin_1.0.3_macOS_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.3/pandev-cli-plugin_1.0.3_macOS_arm64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.3/pandev_1.0.3_amd64.deb | shasum -a 256
 
 !!! YOU HAVE TO CHANGE THE VERSIONS IN 4 LINES !!!
 =end
@@ -12,19 +12,19 @@ curl -sL https://github.com/sendilien7/homebrew-pandev-releasesreleases/download
 class PandevCliPlugin < Formula
   desc "Pandev CLI Plugin"
   homepage "https://github.com/pandev-metriks/homebrew-pandev-cli"
-  version "1.1.7"
+  version "1.0.3"
 
   if OS.mac?
   if Hardware::CPU.intel?
-    url "https://github.com/sendilien7/homebrew-pandev-releasesreleases/download/v1.1.7/pandev-cli-plugin_1.1.7_macOS_amd64.tar.gz"
-    sha256 "2da62cafb315418fac1e5979538cc32add265944d92ca1c24c50bb8effc9de10"
+    url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.3/pandev-cli-plugin_1.0.3_macOS_amd64.tar.gz"
+    sha256 "ef1ec187a61dc75a6d340a8aa908c3f5505a888b91afe2325ce857978d5ef769"
   else
-    url "https://github.com/sendilien7/homebrew-pandev-releasesreleases/download/v1.1.7/pandev-cli-plugin_1.1.7_macOS_arm64.tar.gz"
-    sha256 "f89a31cc03a377c227198b89440eeb9ab8ad1e41b904c9782636c2cc0a1634bc"
+    url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.3/pandev-cli-plugin_1.0.3_macOS_arm64.tar.gz"
+    sha256 "157c46f4b282ce9bb057d285f3f14d677b566a67e100303cb3d71334edac1d99"
     end
   elsif OS.linux?
-    url "https://github.com/sendilien7/homebrew-pandev-releasesreleases/download/v1.1.7/pandev-cli-plugin_1.1.7_Linux_amd64.tar.gz"
-    sha256 "LINUX_HASH_HERE"
+    url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.3/pandev_1.0.3_amd64.deb"
+    sha256 "e98f228c1bf09fec907a330e51b633d7c107473f90be34976c10b47148f4ebcf"
   end
 
   def install

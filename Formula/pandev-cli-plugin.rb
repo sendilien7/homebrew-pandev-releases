@@ -1,33 +1,47 @@
-# After release, update the version and hashes. To get the new hashes run:
-#
-# curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.4/pandev-cli-plugin_1.0.4_macOS_amd64.tar.gz | shasum -a 256
-# curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.4/pandev-cli-plugin_1.0.4_macOS_arm64.tar.gz | shasum -a 256
-# curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.4/pandev-cli-plugin_1.0.4_Linux_amd64.tar.gz | shasum -a 256
+=begin
+After release, update the version and hashes. To get the new hashes run:
+
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.5/pandev-cli-plugin_1.0.5_macOS_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.5/pandev-cli-plugin_1.0.5_macOS_arm64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.5/pandev-cli-plugin_1.0.5_Linux_amd64.tar.gz | shasum -a 256
+=end
 
 class PandevCliPlugin < Formula
   desc "Pandev CLI Plugin"
   homepage "https://github.com/sendilien7/homebrew-pandev-releases"
-  version "1.0.4"
+  version "1.0.5"
 
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_macOS_amd64.tar.gz"
-      sha256 "c7666143beda855b8da1fa0a6ffd5659378538b0fb4b669923f37b6bca790289"
+      sha256 "042c4f9d1396c57e51792352b33997016f8208423c96f056eb500dd0b029c5e3"
     else
       url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_macOS_arm64.tar.gz"
-      sha256 "85e0d435b0348ddf1cfb8519c6dba13050145d8b78a0587567386739681eb24a"
+      sha256 "104a888b415ec44d95ac28338001295d18c500dd99eb6f672d5661c8f3b9c3c9"
     end
   end
 
   on_linux do
     url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_Linux_amd64.tar.gz"
-    sha256 "36d3c4877f14ea3dbcdc8ae40b8a41138f47053b3a7edc04db163f9bb3099a32"
+    sha256 "199adcd9dcee1fc7fc6c19874a243c932f506a0e0f9b88c1ae04c8da72f17b3a"
   end
 
   def install
     libexec.install Dir["*"]
     bin.install_symlink libexec/"bin/pandev"
     bin.install_symlink libexec/"bin/pandev-cli-plugin"
+
+    # On Linux, create symlinks in /usr/local/bin so sudo can find the commands
+    if OS.linux?
+      begin
+        FileUtils.mkdir_p("/usr/local/bin")
+        FileUtils.ln_sf("#{bin}/pandev", "/usr/local/bin/pandev")
+        FileUtils.ln_sf("#{bin}/pandev-cli-plugin", "/usr/local/bin/pandev-cli-plugin")
+      rescue Errno::EACCES
+        opoo "Could not create symlinks in /usr/local/bin. You may need to run:"
+        opoo "  sudo ln -sf #{bin}/pandev-cli-plugin /usr/local/bin/pandev-cli-plugin"
+      end
+    end
   end
 
   def caveats

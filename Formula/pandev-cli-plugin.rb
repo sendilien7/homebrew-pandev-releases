@@ -39,6 +39,7 @@ class PandevCliPlugin < Formula
   def post_install
     ohai "post_install: Starting..."
     debug_file = "#{ENV['HOME']}/.pandev_post_install_debug.log"
+    ohai "after debug_file..."
     File.write(debug_file, "--- post_install ran at: #{Time.now} ---\n", mode: "a")
 
     install_command = ["#{bin}/pandev-cli-plugin", "--install"]

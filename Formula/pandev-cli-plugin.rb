@@ -2,29 +2,29 @@
 =begin
 After release, update the version and hashes. To get the new hashes run:
 
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.7/pandev-cli-plugin_1.0.7_macOS_amd64.tar.gz | shasum -a 256
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.7/pandev-cli-plugin_1.0.7_macOS_arm64.tar.gz | shasum -a 256
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.7/pandev-cli-plugin_1.0.7_Linux_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.8/pandev-cli-plugin_1.0.8_macOS_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.8/pandev-cli-plugin_1.0.8_macOS_arm64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.8/pandev-cli-plugin_1.0.8_Linux_amd64.tar.gz | shasum -a 256
 =end
 
 class PandevCliPlugin < Formula
   desc "Pandev CLI Plugin"
   homepage "https://github.com/sendilien7/homebrew-pandev-releases"
-  version "1.0.7"
+  version "1.0.8"
 
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_macOS_amd64.tar.gz"
-      sha256 "da9ff04a88a0a63e7a79236442032aaec7119aff2856676271f31deb7611ea39  "
+      sha256 "c4b8e5445177a6589a062f843c57a5f4f574b55db0d11c9ef21c541c3f7e368b  "
     else
       url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_macOS_arm64.tar.gz"
-      sha256 "c5885f7746183d71f9807ca963ba2c64bd121744501dc183443f0cee547f069e"
+      sha256 "6c8fdca6374fee600558bd9d008d6a8bd6a0b16480ae971b7c8fae0538a4195c"
     end
   end
 
   on_linux do
     url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_Linux_amd64.tar.gz"
-    sha256 "5c8fc854d0efc6fb1c2b7e2e496e161162d84afbab31880bbea942963c592e42"
+    sha256 "4e15d3ee105df21a0eeb67c290ab693e71999cb350c891f4085b9742ebe4c433"
   end
 
   def install

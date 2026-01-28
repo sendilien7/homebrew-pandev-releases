@@ -38,28 +38,33 @@ class PandevCliPlugin < Formula
 
   def post_install
     ohai "post_install: Starting..."
-
-    # Debug: write to a file to confirm post_install runs
     debug_file = "#{ENV['HOME']}/.pandev_post_install_debug.log"
-    File.write(debug_file, "post_install ran at: #{Time.now}\n", mode: "a")
+    File.write(debug_file, "--- post_install ran at: #{Time.now} ---\n", mode: "a")
 
-    ohai "post_install: Running pandev-cli-plugin --install"
-    ohai "post_install: Binary path: #{bin}/pandev-cli-plugin"
+    install_command = ["#{bin}/pandev-cli-plugin", "--install"]
+    ohai "post_install: Running: #{install_command.join(' ')}"
 
-    # Check if binary exists
-    if File.exist?("#{bin}/pandev-cli-plugin")
-      ohai "post_install: Binary exists!"
-    else
-      ohai "post_install: Binary NOT FOUND!"
+    # Use Open3 to capture stdout, stderr, and the status
+    require "open3"
+    stdout, stderr, status = Open3.capture3(*install_command)
+
+    # Log everything for debugging
+    File.write(debug_file, "STDOUT:\n#{stdout}\n", mode: "a")
+    File.write(debug_file, "STDERR:\n#{stderr}\n", mode: "a")
+    File.write(debug_file, "Exit Status: #{status.exitstatus}\n", mode: "a")
+
+    # Homebrew's post_install fails if the block raises an exception.
+    # We use `odie` to fail with a clear message including the stderr.
+    unless status.success?
+      odie <<~EOS
+        The pandev-cli-plugin installer failed with an exit code of #{status.exitstatus}.
+        Error details have been logged to: #{debug_file}
+        STDERR:
+        #{stderr}
+      EOS
     end
 
-    # Run with output capture for debugging
-    result = system "#{bin}/pandev-cli-plugin", "--install"
-
-    ohai "post_install: Command result: #{result}"
-    File.write(debug_file, "post_install result: #{result}\n", mode: "a")
-
-    ohai "post_install: Done!"
+    ohai "post_install: Successfully completed!"
   end
 
   def pre_uninstall

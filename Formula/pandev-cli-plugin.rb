@@ -37,7 +37,29 @@ class PandevCliPlugin < Formula
   end
 
   def post_install
-    system "#{bin}/pandev-cli-plugin", "--install"
+    ohai "post_install: Starting..."
+
+    # Debug: write to a file to confirm post_install runs
+    debug_file = "#{ENV['HOME']}/.pandev_post_install_debug.log"
+    File.write(debug_file, "post_install ran at: #{Time.now}\n", mode: "a")
+
+    ohai "post_install: Running pandev-cli-plugin --install"
+    ohai "post_install: Binary path: #{bin}/pandev-cli-plugin"
+
+    # Check if binary exists
+    if File.exist?("#{bin}/pandev-cli-plugin")
+      ohai "post_install: Binary exists!"
+    else
+      ohai "post_install: Binary NOT FOUND!"
+    end
+
+    # Run with output capture for debugging
+    result = system "#{bin}/pandev-cli-plugin", "--install"
+
+    ohai "post_install: Command result: #{result}"
+    File.write(debug_file, "post_install result: #{result}\n", mode: "a")
+
+    ohai "post_install: Done!"
   end
 
   def pre_uninstall

@@ -38,34 +38,18 @@ class PandevCliPlugin < Formula
 
   def post_install
     ohai "post_install: Starting..."
-    debug_file = "#{ENV['HOME']}/.pandev_post_install_debug.log"
-    ohai "after debug_file..."
-    File.write(debug_file, "--- post_install ran at: #{Time.now} ---\n", mode: "a")
+    ohai "post_install: Binary = #{bin}/pandev-cli-plugin"
+    ohai "post_install: Exists = #{File.exist?("#{bin}/pandev-cli-plugin")}"
 
-    install_command = ["#{bin}/pandev-cli-plugin", "--install"]
-    ohai "post_install: Running: #{install_command.join(' ')}"
-
-    # Use Open3 to capture stdout, stderr, and the status
     require "open3"
-    stdout, stderr, status = Open3.capture3(*install_command)
+    stdout, stderr, status = Open3.capture3("#{bin}/pandev-cli-plugin", "--install")
 
-    # Log everything for debugging
-    File.write(debug_file, "STDOUT:\n#{stdout}\n", mode: "a")
-    File.write(debug_file, "STDERR:\n#{stderr}\n", mode: "a")
-    File.write(debug_file, "Exit Status: #{status.exitstatus}\n", mode: "a")
+    ohai "post_install: Exit code = #{status.exitstatus}"
+    ohai "post_install: STDOUT = #{stdout[0..200]}" unless stdout.empty?
+    ohai "post_install: STDERR = #{stderr[0..200]}" unless stderr.empty?
 
-    # Homebrew's post_install fails if the block raises an exception.
-    # We use `odie` to fail with a clear message including the stderr.
-    unless status.success?
-      odie <<~EOS
-        The pandev-cli-plugin installer failed with an exit code of #{status.exitstatus}.
-        Error details have been logged to: #{debug_file}
-        STDERR:
-        #{stderr}
-      EOS
-    end
-
-    ohai "post_install: Successfully completed!"
+    opoo "pandev-cli-plugin --install failed" unless status.success?
+    ohai "post_install: Done!"
   end
 
   def pre_uninstall

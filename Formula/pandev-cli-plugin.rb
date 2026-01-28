@@ -1,29 +1,29 @@
 =begin
 After release, update the version and hashes. To get the new hashes run:
 
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.5/pandev-cli-plugin_1.0.5_macOS_amd64.tar.gz | shasum -a 256
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.5/pandev-cli-plugin_1.0.5_macOS_arm64.tar.gz | shasum -a 256
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.5/pandev-cli-plugin_1.0.5_Linux_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.6/pandev-cli-plugin_1.0.6_macOS_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.6/pandev-cli-plugin_1.0.6_macOS_arm64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.6/pandev-cli-plugin_1.0.6_Linux_amd64.tar.gz | shasum -a 256
 =end
 
 class PandevCliPlugin < Formula
   desc "Pandev CLI Plugin"
   homepage "https://github.com/sendilien7/homebrew-pandev-releases"
-  version "1.0.5"
+  version "1.0.6"
 
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_macOS_amd64.tar.gz"
-      sha256 "042c4f9d1396c57e51792352b33997016f8208423c96f056eb500dd0b029c5e3"
+      sha256 "de02dfcd7482087df15a6454c08ccfa71e07970698a44e0372a16fd6340928f3"
     else
       url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_macOS_arm64.tar.gz"
-      sha256 "104a888b415ec44d95ac28338001295d18c500dd99eb6f672d5661c8f3b9c3c9"
+      sha256 "277a5de0ff1dc6bbc7e574af8f8023dd03f59ce9e5338ec1daaaf4e23775c527"
     end
   end
 
   on_linux do
     url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_Linux_amd64.tar.gz"
-    sha256 "199adcd9dcee1fc7fc6c19874a243c932f506a0e0f9b88c1ae04c8da72f17b3a"
+    sha256 "17d9c381720bfcce4390b2d09a76737ae30e04434dfa5a46656374fbb478c59c"
   end
 
   def install
@@ -45,13 +45,25 @@ class PandevCliPlugin < Formula
   end
 
   def caveats
-    <<~EOS
-      To complete installation, run:
-        sudo pandev-cli-plugin --install
+    if OS.linux?
+      <<~EOS
+        To complete installation, run:
+          sudo $(which pandev-cli-plugin) --install
 
-      To uninstall, run before `brew uninstall`:
-        sudo pandev-cli-plugin --uninstall
-    EOS
+        After installation, you can use 'sudo pandev' directly.
+
+        To uninstall, run before `brew uninstall`:
+          sudo pandev-cli-plugin --uninstall
+      EOS
+    else
+      <<~EOS
+        To complete installation, run:
+          sudo pandev-cli-plugin --install
+
+        To uninstall, run before `brew uninstall`:
+          sudo pandev-cli-plugin --uninstall
+      EOS
+    end
   end
 
   test do

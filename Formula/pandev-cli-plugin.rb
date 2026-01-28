@@ -34,11 +34,11 @@ class PandevCliPlugin < Formula
   end
 
   def post_install
-    system "sudo", "#{bin}/pandev-cli-plugin", "--install"
+    system "#{bin}/pandev-cli-plugin", "--install"
   end
 
   def pre_uninstall
-    system "sudo", "#{bin}/pandev-cli-plugin", "--uninstall"
+    system "#{bin}/pandev-cli-plugin", "--uninstall"
   end
 
   test do

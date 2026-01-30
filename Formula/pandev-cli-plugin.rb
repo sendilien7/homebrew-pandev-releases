@@ -2,15 +2,15 @@
 =begin
 After release, update the version and hashes. To get the new hashes run:
 
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.20/pandev-cli-plugin_1.0.20_macOS_amd64.tar.gz | shasum -a 256
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.20/pandev-cli-plugin_1.0.20_macOS_arm64.tar.gz | shasum -a 256
-curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.20/pandev-cli-plugin_1.0.20_Linux_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.21/pandev-cli-plugin_1.0.21_macOS_amd64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.21/pandev-cli-plugin_1.0.21_macOS_arm64.tar.gz | shasum -a 256
+curl -sL https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v1.0.21/pandev-cli-plugin_1.0.21_Linux_amd64.tar.gz | shasum -a 256
 =end
 
 class PandevCliPlugin < Formula
   desc "Pandev CLI Plugin"
   homepage "https://github.com/sendilien7/homebrew-pandev-releases"
-  version "1.0.20"
+  version "1.0.21"
 
   depends_on "jq"
   depends_on "git"
@@ -18,16 +18,16 @@ class PandevCliPlugin < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_macOS_amd64.tar.gz"
-      sha256 "57e3ed155dbac48f71f556c11ee9a0837c153fe441d52c4fdb4e20890f867f2e"
+      sha256 "dab40a3867cc8994b6dbbf1ef5ad729253edde53849985299bba59039f05530d"
     else
       url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_macOS_arm64.tar.gz"
-      sha256 "872a01fbbaf6af4ee25c700cfbaa89048d10586fb8e151bf40996e385765e728"
+      sha256 "858073123f4b89d0d2a1eff12df8866b732b266fe7c5ac643cd1795a4e032a8a"
     end
   end
 
   on_linux do
     url "https://github.com/sendilien7/homebrew-pandev-releases/releases/download/v#{version}/pandev-cli-plugin_#{version}_Linux_amd64.tar.gz"
-    sha256 "96e926a9ecd21b9201bd4dae5b6197746e101821c3d5b34f08776c95eb60266f"
+    sha256 "85ca840d52aef52e4080cfb942ecd1f18afdb1f995bfb4110078f8621a29be44"
   end
 
   def install

@@ -12,8 +12,8 @@ class PandevCliPlugin < Formula
   homepage "https://github.com/sendilien7/homebrew-pandev-releases"
   version "1.1.5"
 
-  depends_on "jq"
-  depends_on "git"
+  # depends_on "jq"
+  # depends_on "git"
 
   on_macos do
     if Hardware::CPU.intel?
